@@ -16,7 +16,7 @@ import java.util.concurrent.Executor;
  */
 @Configuration
 @EnableAsync
-@ComponentScan("com.stts.onlinestore.*")
+@ComponentScan("com.yar.onlinestore.*")
 public class AsyncConfig implements AsyncConfigurer {
 
 /*    @Bean

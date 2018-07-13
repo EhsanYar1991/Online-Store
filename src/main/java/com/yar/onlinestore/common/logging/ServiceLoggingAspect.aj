@@ -19,7 +19,7 @@ public class ServiceLoggingAspect implements LogFactory {
      * logging for process of before service called
      * @param joinPoint join point of aspectJ component
      */
-    @Before("execution(* com.stts.onlinestore.service..*.*(..))")
+    @Before("execution(* com.yar.onlinestore.service..*.*(..))")
     public void beforeCallOperator(JoinPoint joinPoint) throws Throwable {
         getLog().debug(getBeforeCallLogValue(joinPoint));
     }
@@ -28,7 +28,7 @@ public class ServiceLoggingAspect implements LogFactory {
      * logging for process of after service called
      * @param joinPoint join point of aspectJ component
      */
-    @After("execution(* com.stts.onlinestore.service..*.*(..))")
+    @After("execution(* com.yar.onlinestore.service..*.*(..))")
     public void afterCallOperator(JoinPoint joinPoint) throws Throwable {
         getLog().debug(getAfterCallLogValue(joinPoint));
     }
@@ -38,7 +38,7 @@ public class ServiceLoggingAspect implements LogFactory {
      * logging for process of after service called
      * @param exception join point of aspectJ component
      */
-    @AfterThrowing(pointcut = "execution(* com.stts.onlinestore.service..*.*(..))" , throwing = "exception")
+    @AfterThrowing(pointcut = "execution(* com.yar.onlinestore.service..*.*(..))" , throwing = "exception")
     public void afterThrowingException(Exception exception) throws Throwable{
         getLog().debug(exception.getMessage(),exception);
     }

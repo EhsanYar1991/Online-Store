@@ -33,7 +33,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory().withClient("ClientId")
                 .authorizedGrantTypes("authorization_code")
                 .authorities(SecurityRole.ADMIN.getRole(), SecurityRole.MANAGER.getRole(), SecurityRole.USER.getRole())
-//                .scopes("read", "write" , "trust")
+                .scopes("read", "write" , "trust")
                 .scopes("user_info")
                 .resourceIds("oauth2-resource")
                 .accessTokenValiditySeconds(5000)

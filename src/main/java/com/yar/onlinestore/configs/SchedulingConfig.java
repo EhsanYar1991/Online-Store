@@ -16,7 +16,7 @@ import java.util.concurrent.ScheduledExecutorService;
  */
 @Configuration
 @EnableScheduling
-@ComponentScan("com.stts.onlinestore.*")
+@ComponentScan("com.yar.onlinestore.*")
 public class SchedulingConfig implements SchedulingConfigurer {
 
 

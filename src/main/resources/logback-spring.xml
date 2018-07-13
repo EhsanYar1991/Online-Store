@@ -35,7 +35,7 @@
 
         </appender>
 
-        <logger name="com.stts.onlinestore" level="DEBUG" additivity="false">
+        <logger name="com.yar.onlinestore" level="DEBUG" additivity="false">
             <appender-ref ref="FILE-AUDIT"/>
             <appender-ref ref="STDOUT"/>
         </logger>
@@ -80,7 +80,7 @@
 
         </appender>
 
-        <!--<logger name="com.stts.onlinestore" level="INFO"-->
+        <!--<logger name="com.yar.onlinestore" level="INFO"-->
         <!--additivity="false">-->
         <!--<appender-ref ref="FILE-AUDIT" />-->
         <!--<appender-ref ref="STDOUT"/>-->
@@ -93,7 +93,7 @@
     </springProfile>
     <if condition='property("spring.profiles.active").contains("dev")'>
         <then>
-            <logger name="com.stts.onlinestore" level="TRACE" additivity="false">
+            <logger name="com.yar.onlinestore" level="TRACE" additivity="false">
                 <appender-ref ref="FILE-AUDIT"/>
                 <appender-ref ref="STDOUT"/>
             </logger>
@@ -103,7 +103,7 @@
             </root>
         </then>
         <else>
-            <logger name="com.stts.onlinestore" level="INFO" additivity="false">
+            <logger name="com.yar.onlinestore" level="INFO" additivity="false">
                 <appender-ref ref="FILE-AUDIT"/>
                 <appender-ref ref="STDOUT"/>
             </logger>

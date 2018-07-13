@@ -1,7 +1,7 @@
 package com.yar.onlinestore.controller.handler;
 
 
-import com.stts.onlinestore.common.exception.*;
+import com.yar.onlinestore.common.exception.*;
 import com.yar.onlinestore.common.exception.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

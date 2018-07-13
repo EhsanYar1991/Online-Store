@@ -47,6 +47,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter /*Resourc
                 .and().authorizeRequests().antMatchers("/admin").hasAnyAuthority(SecurityRole.ADMIN.getRole()).anyRequest().authenticated()
                 .and().authorizeRequests().antMatchers("/manager").hasAnyAuthority(SecurityRole.ADMIN.getRole(), SecurityRole.MANAGER.getRole()).anyRequest().authenticated()
                 .and().authorizeRequests().antMatchers("/report").hasAnyAuthority(SecurityRole.ADMIN.getRole(), SecurityRole.MANAGER.getRole(), SecurityRole.USER.getRole()).anyRequest().authenticated()
+                .and().authorizeRequests().antMatchers("/swagger-ui.html").hasAnyAuthority(SecurityRole.ADMIN.getRole(), SecurityRole.MANAGER.getRole(), SecurityRole.USER.getRole()).anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                 .and().csrf().disable().headers().frameOptions().disable();
     }

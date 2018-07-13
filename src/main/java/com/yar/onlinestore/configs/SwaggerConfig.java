@@ -3,6 +3,7 @@ package com.yar.onlinestore.configs;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -19,6 +20,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
 @EnableSwagger2
+@Profile("dev")
 public class SwaggerConfig {
 
     @Value("${spring.application.name}")
@@ -35,8 +37,8 @@ public class SwaggerConfig {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.stts.controller"))
-                .paths(regex("/RCL/services.*"))
+                .apis(RequestHandlerSelectors.basePackage("com.yar.onlinestore.controller"))
+                .paths(regex("/*"))
                 .build()
                 .apiInfo(metaData());
     }
@@ -49,7 +51,7 @@ public class SwaggerConfig {
                 projectDescription,
                 projectVersion,
                 "Terms of service",
-                new Contact("Ehsan Yar", "http://www.stts.ir", "e.yarmohammadi@stts.ir"),
+                new Contact("Ehsan Yar", "https://www.onlinestore.com", "ehsanyar2012@gmail.com"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0",
                 vendorExtensions);
