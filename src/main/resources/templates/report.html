@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Online Store</title>
+
+    <div th:replace="fragments/header :: header-css"></div>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <div class="row">
+        <section>
+            <form id="search_transactions" th:action="@{/searchTransactionsInfo}" method="post">
+                <fieldset>
+                    <div class="row">
+                        <div class="form-group hidden">
+                            <input type="hidden" name="userSerialId" id="userSerialId" th:value="${user.serial}"/>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="startDate">Start DateTime:</label>
+                            <input type="datetime-local" th:value="${startDate}" name="startDate" id="startDate"
+                                   class="form-control input-lg"
+                                   placeholder="start date" required="true" autofocus="true"/>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="endDate">End DateTime:</label>
+                            <input type="datetime-local" th:value="${endDate}" name="endDate" id="endDate"
+                                   class="form-control input-lg"
+                                   placeholder="end date" required="true" autofocus="true"/>
+                        </div>
+
+
+                        <div class="row">
+                            <br/>
+                            <div class="col-md-2 col-sm-4 col-sm-4">
+                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Search"/>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+        </section>
+    </div>
+
+    <div class="col-md-12">
+        <div class="row">
+            <div th:if="${transactions}">
+                <section>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col"><span>Register Date</span></th>
+                            <th scope="col"><span>Payment Reference</span></th>
+                            <th scope="col"><span>Amount</span></th>
+                            <th scope="col"><span>Card UId</span></th>
+                            <th scope="col"><span>Card Account Number</span></th>
+                            <th scope="col"><span>Application Id</span></th>
+                            <th scope="col"><span>Device Id</span></th>
+                            <th scope="col"><span>Card Type</span></th>
+                        </tr>
+                        </thead>
+
+                        <tbody th:each="trx :${transactions}">
+                        <tr>
+                            <td scope="row"><span th:text="${trx.registerDate}"></span></td>
+                            <td scope="row"><span th:text="${trx.referenceNumber}"></span></td>
+                            <td scope="row"><span th:text="${trx.eventAmount}"></span></td>
+                            <td scope="row"><span th:text="${trx.cardUID}"></span></td>
+                            <td scope="row"><span th:text="${trx.cardAccountNumber}"></span></td>
+                            <td scope="row"><span th:text="${trx.applicationId}"></span></td>
+                            <td scope="row"><span th:text="${trx.deviceId}"></span></td>
+                            <td scope="row"><span th:text="${trx.cardType.name}"></span></td>
+                        </tr>
+                        </tbody>
+
+
+                    </table>
+
+
+                </section>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Online Store</title>
+
+    <div th:replace="fragments/header :: header-css"></div>
+
+
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <div class="col-md-8">
+
+        <section class="row text-center placeholders">
+            <div style="margin-top: 5%; margin-bottom: 5%;">
+                <!-- Three columns of text below the carousel -->
+                <div class="row">
+                    <div th:each="user :${users}">
+                        <div class="col-md-2" style="margin-bottom: 5%">
+                            <div class="text-center">
+
+                                <span th:text="${user.username}"></span>
+                                <br/>
+                                <span th:text="${user.password}"></span>
+                                <br/>
+                                <span th:text="${user.serial}"></span>
+                                <br/>
+                                <span th:text="${user.enable}"></span>
+                                <br/>
+                                <div class="row">
+                                    <form id="user_report" th:action="@{/report}" method="get">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input type="hidden"  name="userSerialId" id="userSerialId" th:value="${user.serial}"/>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-10">
+                                                    <input type="submit" class="btn btn-md btn-primary btn-block" value="Report"/>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.col-lg-4 -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+        </section>
+
+
+        <!-- /.container -->
+
+
+
+    </div>
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+</body>
+</html>

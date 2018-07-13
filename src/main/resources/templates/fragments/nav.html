@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="header" th:fragment="nav" th:with="
+        isHome=${'/' == #httpServletRequest.requestURI},
+        isDashboard=${'/dashboard' == #httpServletRequest.requestURI}
+    ">
+
+    <ul class="nav nav-pills pull-right">
+        <li th:class="${isHome} ? 'active'"><a th:href="@{/}">Home</a></li>
+
+        <li th:if="${account}" th:class="${isDashboard} ? 'active'"><a th:href="@{/dashboard}">Dashboard</a></li>
+
+        <li th:if="${account}"><a th:href="@{/logout}">Logout</a></li>
+
+        <li th:unless="${account}"><a th:href="@{/login}">Login</a></li>
+    </ul>
+
+    <h3 class="text-muted">Stormpath Spring Boot Webapp Tutorial</h3>
+</div>
+</body>
+</html>

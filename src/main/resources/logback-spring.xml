@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <springProfile name="dev">
+        <property name="DEV_HOME" value="/logs/dev"/>
+
+        <appender name="STDOUT"
+                  class="ch.qos.logback.core.ConsoleAppender">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+                </Pattern>
+            </layout>
+
+        </appender>
+
+        <appender name="FILE-AUDIT"
+                  class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${DEV_HOME}/debug.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+                </Pattern>
+            </encoder>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- rollover daily -->
+                <fileNamePattern>${DEV_HOME}/archived/debug.%d{yyyy-MM-dd}.%i.log
+                </fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+
+        </appender>
+
+        <logger name="com.stts.onlinestore" level="DEBUG" additivity="false">
+            <appender-ref ref="FILE-AUDIT"/>
+            <appender-ref ref="STDOUT"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="FILE-AUDIT"/>
+            <appender-ref ref="STDOUT"/>
+
+        </root>
+    </springProfile>
+    <springProfile name="prod">
+        <property name="PROD_HOME" value="/logs/prod"/>
+
+        <appender name="STDOUT"
+                  class="ch.qos.logback.core.ConsoleAppender">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+                </Pattern>
+            </layout>
+
+        </appender>
+
+        <appender name="FILE-AUDIT"
+                  class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${PROD_HOME}/prod.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+                </Pattern>
+            </encoder>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- rollover daily -->
+                <fileNamePattern>${PROD_HOME}/archived/prod.%d{yyyy-MM-dd}.%i.log
+                </fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+
+        </appender>
+
+        <!--<logger name="com.stts.onlinestore" level="INFO"-->
+        <!--additivity="false">-->
+        <!--<appender-ref ref="FILE-AUDIT" />-->
+        <!--<appender-ref ref="STDOUT"/>-->
+        <!--</logger>-->
+
+        <!--<root level="ERROR">-->
+        <!--<appender-ref ref="FILE-AUDIT" />-->
+        <!--<appender-ref ref="STDOUT"/>-->
+        <!--</root>-->
+    </springProfile>
+    <if condition='property("spring.profiles.active").contains("dev")'>
+        <then>
+            <logger name="com.stts.onlinestore" level="TRACE" additivity="false">
+                <appender-ref ref="FILE-AUDIT"/>
+                <appender-ref ref="STDOUT"/>
+            </logger>
+            <root level="INFO">
+                <appender-ref ref="FILE-AUDIT"/>
+                <appender-ref ref="STDOUT"/>
+            </root>
+        </then>
+        <else>
+            <logger name="com.stts.onlinestore" level="INFO" additivity="false">
+                <appender-ref ref="FILE-AUDIT"/>
+                <appender-ref ref="STDOUT"/>
+            </logger>
+            <root level="ERROR">
+                <appender-ref ref="FILE-AUDIT"/>
+                <appender-ref ref="STDOUT"/>
+            </root>
+        </else>
+    </if>
+
+</configuration>

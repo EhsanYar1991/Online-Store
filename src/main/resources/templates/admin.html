@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Online Store</title>
+
+    <div th:replace="fragments/header :: header-css"></div>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-8">
+                <section class="row text-center placeholders">
+
+                    <form id="add-new-user-form" th:action="@{/addNewUser}" method="post">
+                        <fieldset>
+                            <h1>Add new User</h1>
+                            <div class="form-group">
+                                <input type="text" name="username" id="username" class="form-control input-lg"
+                                       placeholder="username" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="password" id="password" class="form-control input-lg"
+                                       placeholder="password" required="true" autofocus="true"/>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="checkbox" name="enable" id="enable" class="form-control input-lg"
+                                       placeholder="enable" required="true" autofocus="true"/>
+                            </div>
+
+                            <div class="form-group">
+
+                                <ul class="list-group">
+
+                                    <div th:each=" i : ${roles}">
+
+                                        <li class="list-group-item">
+                                            <span th:text="${i.role}"></span>
+                                            <div class="material-switch pull-right">
+                                                <input th:id="${i.role}" th:value="${i.role}" name="role" type="radio"/>
+                                                <!--<label th:for="${i.role}" class="label-default"></label>-->
+                                            </div>
+                                        </li>
+
+                                    </div>
+                                </ul>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-sm-4">
+                                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Add User"/>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-sm-2">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </section>
+            </div>
+
+
+            <div class="col-md-1">
+                <section>
+                    <section class="row text-center placeholders">
+                        <div class="container">
+                            <form th:action="@{/addNewRole}" method="post">
+                                <fieldset>
+                                    <h1>Add new Role</h1>
+
+                                    <div class="form-group col-md-4">
+                                        <input type="text" name="role" id="role" class="form-control input-lg"
+                                               placeholder="Role" required="true" autofocus="true"/>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <input type="submit" class="btn btn-lg btn-primary btn-block"
+                                               value="Add Role"/>
+                                    </div>
+
+
+                                </fieldset>
+                            </form>
+
+                        </div>
+                    </section>
+
+
+                    <section class="row text-center placeholders" >
+
+                        <!-- Three columns of text below the carousel -->
+                        <div th:class="container">
+                            <div class="col-sm-2" style="margin-bottom: 5%; margin-top: 10%">
+                                <div th:each="role :${roles}">
+
+                                    <div class="text-center ">
+
+                                        <p th:text="${role.role}"></p>
+
+                                    </div>
+                                </div>
+                                <!-- /.col-lg-4 -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+
+                    </section>
+
+
+
+
+                </section>
+            </div>
+        </div>
+
+        <section class="row text-center placeholders">
+            <div style="margin-top: 5%; margin-bottom: 5%;">
+                <!-- Three columns of text below the carousel -->
+                <div class="row">
+                    <div th:each="user :${users}">
+                        <div class="col-md-2" style="margin-bottom: 5%">
+                            <div class="text-center">
+
+                                <span th:text="${user.username}"></span>
+                                <br/>
+                                <span th:text="${user.password}"></span>
+                                <br/>
+                                <span th:text="${user.serial}"></span>
+                                <br/>
+
+                                <span th:each="role :${user.roleSet}">
+
+                                        [<span th:text="${role.role}">,</span>]
+
+                                </span>
+
+                                <br/>
+                                <span th:text="${user.enable}"></span>
+                                <br/>
+                                <span th:each="role :${user.roleSet}">
+                                <div th:if="${role.role == 'USER'}" class="row">
+                                    <form id="user_report" th:action="@{/report}" method="get">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input type="hidden"  name="userSerialId" id="userSerialId" th:value="${user.serial}"/>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-10">
+                                                    <input type="submit" class="btn btn-md btn-primary btn-block" value="Report"/>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                </span>
+
+                            </div>
+                        </div>
+                        <!-- /.col-lg-4 -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+        </section>
+
+
+        <!-- /.container -->
+
+
+
+    </div>
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+</body>
+</html>

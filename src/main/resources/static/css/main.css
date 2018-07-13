@@ -1,0 +1,23 @@
+h1{
+	color:#0000FF;
+}
+
+h2{
+	color:#FF0000;
+}
+
+footer{
+    margin-top:60px;
+}
+
+
+.demo-section label {
+	display: block;
+	margin: 15px 0 5px 0;
+}
+#get {
+	float: right;
+	margin: 25px auto 0;
+}
+
+
